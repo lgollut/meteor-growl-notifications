@@ -1,0 +1,9 @@
+{
+  "name": "growl-alert",
+  "description": "A meteorite package giving you a simple way to display grow styled alert in the browser.",
+  "homepage": "https://github.com/lgollut/meteor-growl-alert",
+  "author": "Louis Gollut",
+  "version": "0.1.0",
+  "git": "https://github.com/lgollut/meteor-growl-alert.git",
+  "packages": {}
+}

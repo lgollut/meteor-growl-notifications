@@ -1,5 +1,5 @@
 Package.describe({
-  summary: "A meteorite package giving you a simple way to display grow styled alert in the browser."
+  summary: "A meteorite package giving you a simple way to display grow styled notifications in the browser."
 });
 
 Package.on_use(function (api, where) {
@@ -12,8 +12,8 @@ Package.on_use(function (api, where) {
     ], 'client');
 
   api.add_files([
-    'growl_alert.html',
-    'growl_alert.js'
+    'client/growlNotifications.html',
+    'client/growlNotifications.js'
   ], 'client');
 
   // server

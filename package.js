@@ -18,7 +18,6 @@ Package.on_use(function (api, where) {
   api.add_files('collections/notifications-collection.js', ['client', 'server']);
   api.add_files('server/publications.js', 'server');
   api.add_files('server/methods.js');
-  api.add_files('server/fixtures.js', 'server');
 
   api.add_files('growl-notifications.js', ['client', 'server']);
 

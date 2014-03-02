@@ -1,0 +1,16 @@
+<template name="growlNotifications">
+  <div class="notification-container">
+    {{#each getNotifications}}
+      {{#if isDisplayed this._id}}
+        <div class="alert{{alertType this._id}}{{alertDismissable}} growl pull-right">
+          {{#if isPersistent this._id}}
+            <button id="{{idToString this._id}}" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{/if}}
+          <h4>{{body.title}}</h4>
+          <p>{{body.message}}</p>
+        </div>
+        <div class="clearfix"></div>
+      {{/if}}
+    {{/each}}
+  </div>
+</template>

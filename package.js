@@ -4,33 +4,29 @@ Package.describe({
 
 Package.on_use(function (api, where) {
 
-  // client
+  api.use([
+    'collection2',
+    'simple-schema'
+  ], ['client', 'server']);
+
   api.use([
     'templating',
     'handlebars',
     'less'
     ], 'client');
 
-  api.add_files([
-    'client/growlNotifications.html',
-    'client/growlNotifications.js'
-  ], 'client');
+  api.add_files('collections/notifications-collection.js', ['client', 'server']);
+  api.add_files('server/publications.js', 'server');
+  api.add_files('server/methods.js');
+  api.add_files('server/fixtures.js', 'server');
 
-  // server
-  api.add_files([
+  api.add_files('growl-notifications.js', ['client', 'server']);
 
-  ], 'server');
+  api.add_files('client/less/growl-notifications.less', 'client');
+  api.add_files('client/growl-notifications.html', 'client');
+  api.add_files('client/growl-notifications.js', 'client');
 
-  // client and server
-  api.export('GrowlAlert', ['client', 'server']);
-
-  api.use([
-
-  ], ['client', 'server']);
-
-  api.add_files([
-
-  ], ['client', 'server']);
+  api.export('Growl', ['client', 'server']);
 
 });
 

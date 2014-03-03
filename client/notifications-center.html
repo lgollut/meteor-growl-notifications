@@ -1,0 +1,38 @@
+<template name="notificationCenterIcon">
+    {{#if currentUser}}
+      <li class="{{activeRouteClass 'notificationCenter'}}">
+        <a href="{{pathFor 'notificationCenter'}}">
+          {{#if notificationNumber}}<span class="badge">{{notificationNumber}}</span>&nbsp;{{/if}}<i class="fa fa-bell fa-fw"></i>
+        </a>
+      </li>
+    {{/if}}
+</template>
+
+<template name="notificationCenter">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>Notification center</h1>
+        <hr />
+        {{#with notifications}}
+          <div class="list-group ">
+            {{#each this}}
+              <div class="list-group-item list-group-item-{{header.type}}">
+                <h4 class="list-group-item-heading">{{body.title}}</h4>
+                <p class="list-group-item-text">{{body.message}}</p>
+                <div class="btn-group btn-notification pull-right">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a id="{{idToString this._id}}" class="notification-delete" href="#">Delete</a></li>
+                  </ul>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        {{/with}}
+      </div>
+    </div>
+  </div>
+</template>

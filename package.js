@@ -6,7 +6,8 @@ Package.on_use(function (api, where) {
 
   api.use([
     'collection2',
-    'simple-schema'
+    'simple-schema',
+    'iron-router'
   ], ['client', 'server']);
 
   api.use([
@@ -15,6 +16,7 @@ Package.on_use(function (api, where) {
     'less'
     ], 'client');
 
+  api.add_files('lib/router.js', 'client');
   api.add_files('collections/notifications-collection.js', ['client', 'server']);
   api.add_files('server/publications.js', 'server');
   api.add_files('server/methods.js');
@@ -24,6 +26,8 @@ Package.on_use(function (api, where) {
   api.add_files('client/less/growl-notifications.less', 'client');
   api.add_files('client/growl-notifications.html', 'client');
   api.add_files('client/growl-notifications.js', 'client');
+  api.add_files('client/notifications-center.html', 'client');
+  api.add_files('client/notifications-center.js', 'client');
 
   api.export('Growl', ['client', 'server']);
 

@@ -4,23 +4,12 @@ var notifications;
 
 Template.growlNotifications.helpers({
   getNotifications: function() {
-
-    notifications = Notifications.find();
-
-    Growl.notifications = notifications.fetch();
-
-    if(Session.get('growl') !== undefined) {
-      _.each(Session.get('growl'), function(notification) {
-        Growl.notifications.push(notification);
-      });
-    }
-
-    return Growl.notifications;
+    return Growl.get();
   },
 
   alertType: function(id) {
 
-    current = _.find(Growl.notifications, function(notification) {
+    current = _.find(Growl.get(), function(notification) {
       return EJSON.equals(notification._id, id);
     });
 
@@ -29,7 +18,7 @@ Template.growlNotifications.helpers({
   },
 
   isDisplayed: function(id) {
-    current = _.find(Growl.notifications, function(notification) {
+    current = _.find(Growl.get(), function(notification) {
       return EJSON.equals(notification._id, id);
     });
 
@@ -41,7 +30,7 @@ Template.growlNotifications.helpers({
   },
 
   isPersistent: function(id) {
-    current = _.find(Growl.notifications, function(notification) {
+    current = _.find(Growl.get(), function(notification) {
       return EJSON.equals(notification._id, id);
     });
 
@@ -55,13 +44,28 @@ Template.growlNotifications.helpers({
 
 Template.growlNotifications.events({
   'click .close': function(e) {
-    current = _.find(Growl.notifications, function(notification) {
-      return EJSON.equals(notification._id, new Meteor.Collection.ObjectID(e.target.id));
-    });
 
-    Meteor.call('growlUpdate',
-      {_id: current._id, 'header.recipients': {$elemMatch: {userId: Meteor.userId()}}},
-      {$set: {'header.recipients.$.status': 'dismissed'}}
-    );
+    currentId = $(e.target).parent().attr('id');
+
+    $('#'+currentId).removeClass('fadeInDown').addClass('fadeOutRight');
+    Growl.toDismissed.push(currentId);
+
+    Meteor.setTimeout(function() {
+
+      currentId = Growl.toDismissed.shift();
+
+      Meteor.call('growlUpdate',
+        {_id: new Meteor.Collection.ObjectID(currentId), 'header.recipients': {$elemMatch: {userId: Meteor.userId()}}},
+        {$set: {'header.recipients.$.status': 'dismissed'}}
+      );
+
+      Growl.notificationsDeps.changed();
+
+    }, 1100);
+
   }
-})
+});
+
+Template.growlNotifications.preserve({
+  '.alert.growl[id]': function (node) { return node.id; }
+});

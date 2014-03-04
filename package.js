@@ -7,13 +7,15 @@ Package.on_use(function (api, where) {
   api.use([
     'collection2',
     'simple-schema',
-    'iron-router'
+    'iron-router',
+    'deps'
   ], ['client', 'server']);
 
   api.use([
     'templating',
     'handlebars',
-    'less'
+    'less',
+    'underscore'
     ], 'client');
 
   api.add_files('lib/router.js', 'client');
@@ -21,7 +23,7 @@ Package.on_use(function (api, where) {
   api.add_files('server/publications.js', 'server');
   api.add_files('server/methods.js');
 
-  api.add_files('growl-notifications.js', ['client', 'server']);
+  api.add_files('growl.js', 'client');
 
   api.add_files('client/less/growl-notifications.less', 'client');
   api.add_files('client/growl-notifications.html', 'client');

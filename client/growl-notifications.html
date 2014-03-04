@@ -2,9 +2,9 @@
   <div class="notification-container">
     {{#each getNotifications}}
       {{#if isDisplayed this._id}}
-        <div class="alert{{alertType this._id}}{{alertDismissable}} growl pull-right">
+        <div id="{{idToString this._id}}" class="alert{{alertType this._id}}{{alertDismissable}} growl pull-right fadeInDown animated">
           {{#if isPersistent this._id}}
-            <button id="{{idToString this._id}}" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <button type="button" class="close notification">&times;</button>
           {{/if}}
           <h4>{{body.title}}</h4>
           <p>{{body.message}}</p>
